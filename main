@@ -1,0 +1,71 @@
+from cryptography.fernet import Fernet
+import PySimpleGUI as sg
+
+'''[sg.Text('Enter something on Row 2'), sg.InputText()],'''
+
+sg.theme('DarkAmber')   # Add a touch of color
+# All the stuff inside your window.
+layout = [  [sg.Text('Welcome. Would you like to encrypt or decrypt text?')],
+            [sg.Button('Encrypt'), sg.Button('Decrypt'), sg.Button('Cancel')] ]
+
+# Create the Window
+window = sg.Window('Please choose an option', layout)
+# Event Loop to process "events" and get the "values" of the inputs
+while True:
+    event, values = window.read()
+    if event == sg.WIN_CLOSED or event == 'Cancel': # if user closes window or clicks cancel
+        window.close()
+    elif event == 'Encrypt':
+        window.close()
+        layout = [  [sg.Text('What text would you like to encrpyt?'), sg.InputText()],
+                    [sg.Button('Enter'), sg.Button('Cancel')]]
+        window = sg.Window('What text would you like to encrypt?')
+        while True:
+            event, values = window.read()
+    elif event == 'Decrypt':
+        pass
+    
+
+
+
+
+
+
+
+"""def write_key():
+    key = Fernet.generate_key()
+    with open("key.key", "wb") as key_file:
+        key_file.write(key)
+
+write_key()"""
+
+'''def load_key():
+    file = open("key.key", "rb")
+    key = file.read()
+    file.close()
+    return key
+
+
+key = load_key()
+f = Fernet(key)
+
+while True:
+    choice = input("Would you like to encode a message (1) or decode a message (2) or quit (0)?\n")
+
+
+    if choice == ("1"):
+        e = input("What would you like to encrypt?\n")
+        ed = f.encrypt(e.encode()).decode()
+        print("Your encoded message is: \n" + ed)
+        continue
+    elif choice == ("2"):
+        d = input("What would you like to decode?\n")
+        ded = f.decrypt(d.encode()).decode()
+        print("Your decoded message is: \n" + ded)
+        continue
+    elif choice == ("0"):
+        print("Thank you for using this platform. Your program will now quit.")
+        break
+    else:
+        print("That is not an option. Please try again")
+        continue'''
